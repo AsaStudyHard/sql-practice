@@ -286,6 +286,9 @@ TRUNCATE sql_basic.exam_record;
 
 /*
  查询
+
+ notic: 使用count()聚合时, 他对于null不会计数
+ count( distinct if(expr, true_rs, false_rs) ) 首先我们if和distinct会把所有的元素进行一次筛选, 然后对于这个迭代的数据在进行count
  */
 
 DROP TABLE IF EXISTS exam_record;
@@ -360,6 +363,9 @@ DESC user_info;
  SQL120 删除表
 
  现在随着数据越来越多，存储告急，请你把很久前的（2011到2014年）备份表都删掉（如果存在的话）
+
+ drop table if exists table_name;
+
  */
 DROP TABLE IF EXISTS exam_record;
 CREATE TABLE IF NOT EXISTS exam_record
@@ -387,6 +393,8 @@ DROP TABLE IF EXISTS `exam_record_2011`,
  SQL121 创建索引
 
  在duration列创建普通索引idx_duration、在exam_id列创建唯一性索引uniq_idx_exam_id、在tag列创建全文索引full_idx_tag。
+
+ alter table table_name add index index_type index_name(field | column_name)
  */
 DROP TABLE IF EXISTS examination_info;
 CREATE TABLE IF NOT EXISTS examination_info
@@ -411,6 +419,8 @@ SHOW INDEX FROM sql_basic.`examination_info`;
  SQL122 删除索引
 
  请删除examination_info表上的唯一索引uniq_idx_exam_id和全文索引full_idx_tag。
+
+ alter table table_name drop index index_name
  */
 ALTER TABLE sql_basic.`examination_info`
     DROP INDEX `uniq_idx_exam_id`,
